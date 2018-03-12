@@ -3,9 +3,10 @@ import sys
 import itertools
 import pprint
 
-# TODO: get from command line?
 BLANK_LINE_EVERY = 8
 HEADER_LINE_EVERY = 40
+
+# TODO: get from command line?
 SERVER_URI = 'mongodb://localhost:27017'
 # server_uri = 'mongodb://metadata-db-prod:27017'
 
@@ -15,7 +16,7 @@ GREEN_COLOR_CHANNEL = 2
 
 def cols(cells):
     number_cols = 1 + len(WELLS_FOR_ONLINE_ANALYSIS)
-    # right align, col width of 5:
+    # right align, col of fixed width:
     pattern = '{:>5} ' * number_cols
     result = pattern.format(*cells)
     return result
@@ -26,10 +27,8 @@ def print_header():
 
 
 client = pymongo.MongoClient(SERVER_URI)
-
-# TODO: default to most recent collection
 stream_id = sys.argv[1]
-
+# TODO: default to most recent collection
 collection = client.streams['strm_' + stream_id]
 
 cursor = collection.find(filter={
@@ -57,6 +56,8 @@ for timestamp, timestamp_group in timestamp_groups:
         print()
     if row_count % HEADER_LINE_EVERY == 0:
         print_header()
+
+    # TODO: verify that we start with T=1, and all T's are sequential
 
     intgness_by_sstream = {doc['substream_id']: doc['interestingness'] for doc in timestamp_group}
 

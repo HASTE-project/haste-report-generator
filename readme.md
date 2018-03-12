@@ -2,6 +2,8 @@ Prints a summary of computed interestingness values to the console.
 
 (for AZN/microscopy use case).
 
+Contributors: Ben Blamey
+
 ### Usage
 
 Connects to metadata-db on `localhost:27017` - you need to forward the port!
