@@ -35,6 +35,10 @@ def print_ground_truth():
 
 client = pymongo.MongoClient(SERVER_URI)
 stream_id = sys.argv[1]
+if stream_id.startswith('strm_'):
+    stream_id = stream_id[5:]
+    print('Note: Ignoring the strm_ prefix - whilst used in the DB, it is not part of the stream ID!')
+
 # TODO: default to most recent collection
 collection = client.streams['strm_' + stream_id]
 
