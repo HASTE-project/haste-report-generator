@@ -10,7 +10,7 @@ Connects to metadata-db on `localhost:27017` - you need to forward the port!
 
 (for given `stream_id` without a 'strm_' prefix!):
 ```
-python3 -m haste.report_generator strm_2018_03_05__14_35_26_from_al
+python3 -m haste.report_generator 2018_03_05__14_35_26_from_al
 ```
 
 Expected Result:
@@ -120,4 +120,12 @@ legend:
    86     1     1     1     1     1     1     1     1     1     1     1     1 
    87     1     1     1     1     1    -      1     1     1     1     1     1 
    88     1     1     1     1     1     1     1     1     1     1     1     1 
+```
+
+# Usage with `watch`
+Can be used to show 'live progress' of a test run (needs a decent internet connection)
+`watch` can be installed on macosx with `brew install watch`
+
+```
+watch --interval 5 "python3 -m haste.report_generator 2018_03_18__13_16_21_from_al | tail -n 50"
 ```
